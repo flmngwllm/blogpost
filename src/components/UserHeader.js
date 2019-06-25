@@ -10,8 +10,8 @@ class UserHeader extends Component {
     }
     render() {
 
-        //finding a single user
-        const user = this.props.users.find( user => user.id === this.props.userId);
+        //finding a single user and make component more reusable
+        const {user} = this.props
         if (!user){
             return null
         }
@@ -24,8 +24,9 @@ class UserHeader extends Component {
     }
 }
 
-const mapStateToProps =(state) => {
-    return {users : state.users}
+//get data out of redux store also reference to the props that about to be sent to the component using ownProps
+const mapStateToProps =(state, ownProps) => {
+    return {user : state.users.find(user => user.id === ownProps.userId)}
 }
 
 // connect to get action
